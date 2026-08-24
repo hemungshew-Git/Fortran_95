@@ -1,10 +1,9 @@
 * -------------------------------------------------------- * 
-      PROGRAM EULER
+      PROGRAM HEUN 
 * -------------------------------------------------------- *
 * Main program                                             *
-*     This program  estimates  the solution of the first   *
-*     order differential equation y' = f(x, y) at a given  *
-*     point using Euler's method                           *  
+*     This program solves the first order differential     *
+*     equation y' = f(x, y) using the Heun's method        *
 * -------------------------------------------------------- *
 * Functions invoked                                        *
 *     F,INT                                                *
@@ -16,24 +15,23 @@
 *     X - Initial value of independent variable            *
 *     Y - Initial value of dependent variable              *
 *    XP - Point of solution                                *
-*     H - Incremental step-size                            *
-*     N - Number of computational steps required           *
-*    DY - Incremental Y in each step                       *
+*     H - Step-size                                        *
+*     N - Number of steps                                  *
 * -------------------------------------------------------- *
 * Constants used                                           *
 *     NIL                                                  *
 * -------------------------------------------------------- *
 
-      REAL X,Y,XP,H,DY,F
+      REAL X,Y,XP,H,M1,M2,F
       INTEGER N,INT
-      EXTERNAL F
       INTRINSIC INT
+      EXTERNAL F
 
       WRITE(*,*)
-      WRITE(*,*)'            SOLUTION BY EULERS METHOD'
+      WRITE(*,*)'            SOLUTION BY HEUNS METHOD'
       WRITE(*,*)
- 
-* Read values
+
+* Input values
 
       WRITE(*,*) 'Input initial values of x and y'
       READ(*,*) X,Y
@@ -48,23 +46,24 @@
 
 * Compute Y recursively at each step
 
-      DO 10 I = 1,N
-         DY = H*F(X,Y)
+      DO 20 I = 1,N
+         M1 = F(X,Y)   
+         M2 = F(X+H,Y+M1*H)
          X = X+H
-         Y = Y+DY
+         Y = Y+0.5*H*(M1+M2)
          WRITE(*,*) I,X,Y
-10    CONTINUE
+20    CONTINUE
 
-* write the final result
+* Write the final result
 
       WRITE(*,*)
-      WRITE(*,*)'Value of Y at X  =',X,'  is', Y
+      WRITE(*,*)'Value of Y at X  =', X, '  is', Y
       WRITE(*,*)
-     
+
       STOP
       END
 
-* ------------------ End of main EULER ------------------- *
+* ------------------ End of main HEUN -------------------- *
 * -------------------------------------------------------- *
 * Function subprogram                                      *
 * -------------------------------------------------------- *

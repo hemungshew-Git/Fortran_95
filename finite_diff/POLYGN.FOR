@@ -1,10 +1,9 @@
 * -------------------------------------------------------- * 
-      PROGRAM EULER
+      PROGRAM POLYGN
 * -------------------------------------------------------- *
 * Main program                                             *
-*     This program  estimates  the solution of the first   *
-*     order differential equation y' = f(x, y) at a given  *
-*     point using Euler's method                           *  
+*     This program solves the differential equation        *
+*     of type y' = f(x, y) by polygon method               *
 * -------------------------------------------------------- *
 * Functions invoked                                        *
 *     F,INT                                                *
@@ -13,27 +12,26 @@
 *     NIL                                                  *
 * -------------------------------------------------------- *
 * Variables used                                           *
-*     X - Initial value of independent variable            *
-*     Y - Initial value of dependent variable              *
+*     X - Initial value of the independent variable        *
+*     Y - Initial value of the dependent variable          *
 *    XP - Point of solution                                *
 *     H - Incremental step-size                            *
-*     N - Number of computational steps required           *
-*    DY - Incremental Y in each step                       *
+*     N - Number of computational steps required           *    
 * -------------------------------------------------------- *
 * Constants used                                           *
 *     NIL                                                  *
 * -------------------------------------------------------- *
 
-      REAL X,Y,XP,H,DY,F
+      REAL X,Y,XP,H,M1,M2,F
       INTEGER N,INT
-      EXTERNAL F
       INTRINSIC INT
+      EXTERNAL F
 
       WRITE(*,*)
-      WRITE(*,*)'            SOLUTION BY EULERS METHOD'
+      WRITE(*,*)'            SOLUTION BY POLYGON METHOD'
       WRITE(*,*)
- 
-* Read values
+
+* Input values
 
       WRITE(*,*) 'Input initial values of x and y'
       READ(*,*) X,Y
@@ -46,25 +44,26 @@
 
       N = INT((XP-X)/H+0.5)
 
-* Compute Y recursively at each step
+* compute Y at each step
 
-      DO 10 I = 1,N
-         DY = H*F(X,Y)
-         X = X+H
-         Y = Y+DY
+      DO 30 I = 1,N
+         M1 = F(X,Y)   
+         M2 = F(X+0.5*H,Y+0.5*H*M1)
+         X = X+H 
+         Y = Y+M2*H
          WRITE(*,*) I,X,Y
-10    CONTINUE
+30    CONTINUE
 
-* write the final result
+* Write the final value of Y
 
       WRITE(*,*)
-      WRITE(*,*)'Value of Y at X  =',X,'  is', Y
+      WRITE(*,*) 'Value of Y at X  =', X, '  is', Y
       WRITE(*,*)
-     
+
       STOP
       END
 
-* ------------------ End of main EULER ------------------- *
+* ----------------- End of main POLYGN ------------------- *
 * -------------------------------------------------------- *
 * Function subprogram                                      *
 * -------------------------------------------------------- *

@@ -1,10 +1,10 @@
 * -------------------------------------------------------- * 
-      PROGRAM EULER
+      PROGRAM RUNGE4    
 * -------------------------------------------------------- *
 * Main program                                             *
-*     This program  estimates  the solution of the first   *
-*     order differential equation y' = f(x, y) at a given  *
-*     point using Euler's method                           *  
+*     This program computes the solution of first order    *
+*     differential equation of type  y' = f(x,y)  using    *
+*     the 4th order Runge-Kutta method                     *
 * -------------------------------------------------------- *
 * Functions invoked                                        *
 *     F,INT                                                *
@@ -16,24 +16,23 @@
 *     X - Initial value of independent variable            *
 *     Y - Initial value of dependent variable              *
 *    XP - Point of solution                                *
-*     H - Incremental step-size                            *
-*     N - Number of computational steps required           *
-*    DY - Incremental Y in each step                       *
+*     H - Step-size                                        *
+*     N - Number of steps                                  *
 * -------------------------------------------------------- *
 * Constants used                                           *
 *     NIL                                                  *
 * -------------------------------------------------------- *
 
-      REAL X,Y,XP,H,DY,F
+      REAL X,Y,XP,H,M1,M2,M3,M4,F
       INTEGER N,INT
-      EXTERNAL F
       INTRINSIC INT
+      EXTERNAL F
 
       WRITE(*,*)
-      WRITE(*,*)'            SOLUTION BY EULERS METHOD'
+      WRITE(*,*)'        SOLUTION BY 4_TH ORDER R-K METHOD'
       WRITE(*,*)
- 
-* Read values
+         
+* Input values
 
       WRITE(*,*) 'Input initial values of x and y'
       READ(*,*) X,Y
@@ -46,25 +45,32 @@
 
       N = INT((XP-X)/H+0.5)
 
-* Compute Y recursively at each step
+* Compute Y at each step
 
-      DO 10 I = 1,N
-         DY = H*F(X,Y)
-         X = X+H
-         Y = Y+DY
+      WRITE(*,*)'      -----------------------------------------'
+      WRITE(*,*)'        STEP           X                 Y     '
+      WRITE(*,*)'      -----------------------------------------'
+      DO 40 I = 1,N
+         M1 = F(X,Y)   
+         M2 = F(X+0.5*H,Y+0.5*M1*H)
+         M3 = F(X+0.5*H,Y+0.5*M2*H)
+         M4 = F(X+H,Y+M3*H)
+         X = X+H 
+         Y = Y+(M1+2.0*M2+2.0*M3+M4)*H/6.0
          WRITE(*,*) I,X,Y
-10    CONTINUE
+40    CONTINUE
+      WRITE(*,*)'      -----------------------------------------'
 
-* write the final result
+* Write the final value of Y
 
       WRITE(*,*)
-      WRITE(*,*)'Value of Y at X  =',X,'  is', Y
+      WRITE(*,*)'Value of Y at X  =', '  is', Y
       WRITE(*,*)
      
       STOP
       END
 
-* ------------------ End of main EULER ------------------- *
+* ----------------- End of main RUNGE4 ------------------- *
 * -------------------------------------------------------- *
 * Function subprogram                                      *
 * -------------------------------------------------------- *
