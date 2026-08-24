@@ -9,4 +9,10 @@ Just opposite to the Bernoulli Sequence that we went over earlier in which each 
 
 Then the Wiener process which is essentially a generalization of the Random Walk. It’s basically a random walk with very tiny steps. Brownian motion is probably the most well known example of a Wiener process.
 
+To ignore this randomness or uncertainty is to ignore reality. 
+Events that cannot be predicted precisely are often called random. 
+Even people’s reactions to any inputs or outputs or their impacts ==> all are at Random. 
+Commonly used tools for dealing with uncertainty is 
+optimization, simulation and statistical models for impact prediction and evaluation.
+
 Life is LIKE A PUZZLE which I AM TRYING TO MODEL gradually BIT BY BIT ===> via GITHUB uploads to the CLOUD (my works since 1993) last 30+ beautiful years !
