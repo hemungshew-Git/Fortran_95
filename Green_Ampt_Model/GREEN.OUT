@@ -1,0 +1,128 @@
+ ****************************************************
+ * Green-Ampt Model for Calculation of Infiltration *
+ * rate & the amount under various scenarios        *
+ ****************************************************
+ (Source: Applied Hydrology by Chow/Maidement/Mays) 
+ ----------------------------------------------------
+  
+ The input datas are: 
+  
+ Porosity                               =  4.530000E-001
+ Effective porosity                     =  4.120000E-001
+ Wetting front soil suction head        =        11.0100000
+ Hydrulic conductivity (K)              =         1.0900000
+ rainfall intensity    (i) in cm/hr     =         4.0000000
+ rainfall duration     (t) in hours     =         3.0000000
+ time steps      (delta t) in minutes   =           10
+ initial effective saturation           =  4.000000E-001
+  
+ ---------------------------------------------------
+ Case 1: Under Constant Ponding
+  
+ *-------------------------------------------------*
+ * 1st column = t (rainfall duration) in hours     *
+ * 2nd column = t (rainfall duration) in minutes   *
+ * 3rd column = f (cumulative infiltration) in cm  *
+ * 4th column = inf (infiltration rate) in cm/hr   *
+ *-------------------------------------------------*
+     .17      10       1.1190       3.7410
+     .33      20       1.6583       2.8790
+     .50      30       2.1033       2.5004
+     .67      40       2.5001       2.2766
+     .83      50       2.8661       2.1251
+    1.00      60       3.2106       2.0140
+    1.17      70       3.5389       1.9283
+    1.33      80       3.8543       1.8597
+    1.50      90       4.1594       1.8032
+    1.67     100       4.4559       1.7558
+    1.83     110       4.7451       1.7152
+    2.00     120       5.0280       1.6800
+    2.17     130       5.3053       1.6492
+    2.33     140       5.5779       1.6219
+    2.50     150       5.8461       1.5975
+    2.67     160       6.1105       1.5755
+    2.83     170       6.3714       1.5556
+    3.00     180       6.6291       1.5375
+ ---------------------------------------------------
+  
+ *--------------------------------------------------*
+  Case2 : When ponding just starts 
+ *--------------------------------------------------*
+ *                                                  *
+ *   t  = Rainfall duration                         *
+ *   tp = Time required for ponding to occur after  *
+ *        rain starts at t = 0;                     *
+ *   fp = Infiltrate depth at ponding in cm         *
+ * infp = Infiltrate rate at ponding in cm/hr       *
+ *--------------------------------------------------*
+  
+     tp    in minutes     =    15.291870
+     tp    in hours       =      .25
+     fp    in cm          =     1.0195
+     infp  in cm/hr       =     4.0000
+ *------------------------------------------------*
+  
+ Note:
+  
+ Please, check the values of (fp & infp) as obtained
+ above [in Case 2] against the results below       
+ [in Case 3] in (cloumn 3 & column 4), when t = tp;
+  
+  
+ *--------------------------------------------------*
+ Case 3 : Under Constant Rainfall Intensity(i)
+ *-------------------------------------------------*
+ * 1st column = t (rainfall duration) in hours     *
+ * 2nd column = t (rainfall duration) in minutes   *
+ * 3rd column = f (cumulative infiltration) in cm  *
+ * 4th column = inf (infiltration rate) in cm/hr   *
+ *-------------------------------------------------*
+  
+     .17      10        .5981       6.0498
+     .33      20       1.3055       3.3623
+     .50      30       1.8060       2.7326
+     .67      40       2.2329       2.4186
+     .83      50       2.6186       2.2229
+    1.00      60       2.9771       2.0865
+    1.17      70       3.3160       1.9846
+    1.33      80       3.6399       1.9050
+    1.50      90       3.9519       1.8407
+    1.67     100       4.2541       1.7874
+    1.83     110       4.5481       1.7423
+    2.00     120       4.8352       1.7036
+    2.17     130       5.1162       1.6698
+    2.33     140       5.3920       1.6402
+    2.50     150       5.6631       1.6138
+    2.67     160       5.9301       1.5903
+    2.83     170       6.1934       1.5690
+    3.00     180       6.4532       1.5497
+ *------------------------------------------------*
+  
+ Some Observations are : 
+  
+ When ponding just starts(at t= tp): 
+ ----------------------------------- 
+ infp = inf = i   &   fp = f [as in Case 2 & Case 3]
+ where i= input rainfall intensity.
+  
+  
+ Any (-) ve values of (f &/or inf), in the begining
+ time steps, indicates "No infiltration" 
+  
+ Like rate & duration of rainfall(as input data), the
+ rate & duration of irrigated also may be considered.
+  
+ *------------------------------------------------*
+  
+  
+ Some factors overlooked here are :
+  
+ Vegetation cover, Air confinement ahead of the
+ wetting front, Surface roughness, Plant roots etc;
+  
+ these retard the flow & creat additional pore spaces
+ so infiltration & K (Hydraulic conductivity) of
+ the soil increases!
+  
+ a small program by Mr. A. Borgohain 
+ ------------------------------------thanks!
