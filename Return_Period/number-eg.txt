@@ -1,0 +1,44 @@
+4
+    4.     8.    12.    16.
+    5.     9.    13.    17.
+    6.    10.    14.    18.
+    7.    11.    15.    19.
+
+c     To generate serial numbers in an array
+
+      integer r,c,x
+      dimension a(50,50)
+      
+      WRITE(*,*)'INPUT THE INITIAL VALUE OF THE ARRAY'
+      write(*,*) 'Numbers of rows & Number of columns'
+      read(*,*) x,r,c
+
+      a(1,1)=x
+
+      do 1 i=1,r
+      do 2 j=2,c
+
+      a(1,j)=a(1,j-1) + r
+      
+2     continue
+1     continue
+
+      do 3 i=2,r
+      do 4 j=1,c
+
+      a(i,j)=a(i-1,j)+1
+
+4     continue
+3     continue
+        
+************************************************************************
+
+      do 6 i=1,r
+
+      write(*,100) (a(i,j),j=1,r)
+
+100   format( 50(50f7.0)  )
+
+6     CONTINUE
+      
+      end
